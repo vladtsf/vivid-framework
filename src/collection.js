@@ -46,7 +46,7 @@ Vivid.Collection = (function() {
 		 * @return bool
 		 */
 		this.has = function(key) {
-		    return vars[key] !== null | vars[key] !== undefined ? true : false;
+		    return vars[key] !== null & vars[key] !== undefined ? true : false;
 		};
 
 		/**
