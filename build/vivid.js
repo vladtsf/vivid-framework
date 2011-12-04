@@ -434,10 +434,14 @@ Vivid.Template = (function() {
 	     * @private
 	     */
 	    var parse = function(match) {
-		    var
-			    varName = match.replace(quotes, '');
+		if(match == '::') {
+		    return match;
+		}
+		
+		var
+			varName = match.replace(quotes, '');
 
-		    return '" + (' + varName + '!== undefined ? '+ varName +' : "") + "';
+		return '"+(function(){try{return ' + varName + ';}catch(__e){return "";}})()+"';
 	    }
 
 	    /**
@@ -446,8 +450,8 @@ Vivid.Template = (function() {
 	     * @return Template
 	     */
 	    this.compile = function() {
-		    code = ('"' + markup.replace(/"/g, '\\"').replace(variable, parse) + '"');
-		    return this;
+		code = ('"' + markup.replace(/"/g, '\\"').replace(variable, parse) + '"');
+		return this;
 	    };
 
 	    /**
