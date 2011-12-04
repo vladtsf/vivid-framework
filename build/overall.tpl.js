@@ -3,7 +3,6 @@
 //<!include file="../src/intro.js"-->
 
 //<!include file="../src/console.js"-->
-//<!include file="../src/object.js"-->
 //<!include file="../src/collection.js"-->
 //<!include file="../src/cookie.js"-->
 //<!include file="../src/control.js"-->
