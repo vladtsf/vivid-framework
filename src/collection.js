@@ -1,8 +1,3 @@
-/**
- * Simple collection class
- * 
- * @name $.Vivid.Collection
- */
 Vivid.Collection = (function() {
     
     /**
@@ -13,7 +8,9 @@ Vivid.Collection = (function() {
     var vars = new Object();
     
     /**
-     * @constructor
+     * Simple collection class
+     * 
+     * @name $.Vivid.Collection
      */
     var Collection = function() {
 	    if(this instanceof Collection) {

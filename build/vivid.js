@@ -56,11 +56,6 @@ Vivid.Console = (function() {
     }
 })();
 
-/**
- * Simple collection class
- * 
- * @name $.Vivid.Collection
- */
 Vivid.Collection = (function() {
     
     /**
@@ -71,7 +66,9 @@ Vivid.Collection = (function() {
     var vars = new Object();
     
     /**
-     * @constructor
+     * Simple collection class
+     * 
+     * @name $.Vivid.Collection
      */
     var Collection = function() {
 	    if(this instanceof Collection) {
@@ -381,97 +378,101 @@ Control.prototype = {
 };
 
 Vivid.Control = Control;
-/**
- * Simple template engine
- * 
- * @name $.Vivid.Template
- * @param {string} markup template markup
- * @example
- *	var tpl = new Template('Hello, :entityname:!');
- *	tpl.compile();
- *	alert(tpl.eval({entityname: 'world'})); // Hello, world!
- */
-var Template = function(markup) {
+Vivid.Template = (function() {
+    
+    /**
+     * Variable search RegExp
+     */
+    var variable = (/\:([\w])*\:/g);
+
+    /**
+     * Quotes replacing template
+     */
+    var quotes = (/:/g);
+    
+    /**
+     * Simple template engine
+     * 
+     * @name $.Vivid.Template
+     * @param {string} markup template markup
+     * @example
+     *	var tpl = new Template('Hello, :entityname:!');
+     *	tpl.compile();
+     *	alert(tpl.eval({entityname: 'world'})); // Hello, world!
+     */
+    var Template = function(markup) {
 	if(this instanceof Template) {
 
-		/**
-		 * Evaluated code
-		 * 
-		 * @private
-		 */
-		var code = '';
+	    /**
+	     * Evaluated code
+	     * 
+	     * @private
+	     */
+	    var code = '';
 
-		/**
-		 * Replaces the variable to executable code fragement
-		 * 
-		 * @param {string} match current match
-		 * @private
-		 */
-		var parse = function(match) {
-			var
-				varName = match.replace(Template.quotes, '');
+	    /**
+	     * Replaces the variable to executable code fragement
+	     * 
+	     * @param {string} match current match
+	     * @private
+	     */
+	    var parse = function(match) {
+		    var
+			    varName = match.replace(quotes, '');
 
-			return '" + (' + varName + '!== undefined ? '+ varName +' : "") + "';
-		}
+		    return '" + (' + varName + '!== undefined ? '+ varName +' : "") + "';
+	    }
 
-		/**
-		 * Compiles template markup to executable js code
-		 * 
-		 * @return Template
-		 */
-		this.compile = function() {
-			code = ('"' + markup.replace(/"/g, '\\"').replace(Template.variable, parse) + '"');
-			return this;
-		};
+	    /**
+	     * Compiles template markup to executable js code
+	     * 
+	     * @return Template
+	     */
+	    this.compile = function() {
+		    code = ('"' + markup.replace(/"/g, '\\"').replace(variable, parse) + '"');
+		    return this;
+	    };
 
-		/**
-		 * Substitutes values ​​of variables in the template
-		 * 
-		 * @param {object} variables template variables
-		 * @param {function} callback the asynchronous call callback
-		 */
-		this.eval = function(variables, callback) {
-			var
-				result,
-				vars = variables || new Object();
+	    /**
+	     * Substitutes values ​​of variables in the template
+	     * 
+	     * @param {object} variables template variables
+	     * @param {function} callback the asynchronous call callback
+	     */
+	    this.eval = function(variables, callback) {
+		var
+		    result,
+		    vars = variables || new Object();
 
-			if(typeof(callback) == 'function') {
-				setTimeout(function() {
-					with(vars) {
-						result = eval(code);
-					}
-
-					callback.call(this, result);
-				}, 0);
-
-				return this;
-			}	
-
+		if(typeof(callback) == 'function') {
+		    setTimeout(function() {
 			with(vars) {
-				result = eval(code);
+			    result = eval(code);
 			}
 
-			return result;
-		};
+			callback.call(this, result);
+		    }, 0);
 
-		return this;
+		    return this;
+		}	
+
+		with(vars) {
+		    result = eval(code);
+		}
+
+		return result;
+	    };
+
+	    return this;
 	}
 
 	return new Template(markup);
-};
+    };
 
-/**
- * Variable search RegExp
- */
-Template.variable = (/\:([\w])*\:/g);
-
-/**
- * Quotes replacing template
- */
-Template.quotes = (/:/g);
+    return Template;
+})();
 
 
-Vivid.Template = Template;
 
 $.fn.log = function() {
 	Vivid.Console.log(this);
