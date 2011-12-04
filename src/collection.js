@@ -80,9 +80,11 @@ Vivid.Collection = (function() {
 		this.count = function() {
 		    var count = 0;
 		    
-		    $.each(vars, function() {
-			count++;
-		    });
+		    for(var i in vars) {
+			if(vars.hasOwnProperty(i) & vars[i] != undefined) {
+			    count++;
+			}
+		    }
 		    
 		    return count;
 		};
