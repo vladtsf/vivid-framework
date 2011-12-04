@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<title>Vivid JS test</title>
+	<title>Vivid JS unit tests</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	
+	<!-- QUnit -->
+	<script type="text/javascript" src="./qunit/qunit/qunit.js"></script>
+	<link rel="stylesheet" href="./qunit/qunit/qunit.css" />
 
+	<!-- jQuery -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	
+	<!-- Framework -->
 	<script type="text/javascript" src="../build/vivid.js"></script>
+
+	<!-- Tests -->
+	<script type="text/javascript" src="../build/tests.js"></script>
 
     </head>
     <body>
+	<h1 id="qunit-header">QUnit example</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">test markup, will be hidden</div>
     </body>
 </html>
