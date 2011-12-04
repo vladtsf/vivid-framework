@@ -1,0 +1,3 @@
+[submodule "build/builder"]
+	path = build/builder
+	url = git@github.com:vtsvang/vivid-builder.git
