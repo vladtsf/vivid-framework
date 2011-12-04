@@ -1,5 +1,5 @@
 # Vivid Framework
-Vivid is a small tools set, very useful for jQuery plugins developers.
+Vivid is a small tools set very useful for jQuery plugins developers.
 
 ## Modules
 
