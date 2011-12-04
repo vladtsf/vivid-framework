@@ -5,7 +5,6 @@
     
     test('Basic tests', function() {
       
-//      expect(5);
 	var col = new Vivid.Collection();
 	
 	col
@@ -27,7 +26,28 @@
     
     test('All console methods test', function() {
       
-//      expect(5);
+	var
+	    c = Vivid.Console,
+	    obj = {foo: 'bar' },
+	    err = new Error('foo'),
+	    str = 'foo';
+	
+	c.log(obj);
+	c.assert(str);
+	c.clear();
+	c.count();
+	c.dir(obj);
+	c.dirxml(obj);
+	c.exception(err);
+	c.group(str);
+	c.groupCollapsed(str);
+	c.groupEnd(str);
+	c.profile(str);
+	c.profileEnd(str);
+	c.table(obj);
+	c.time(str);
+	c.timeEnd(str);
+	c.trace();
       
     });
     

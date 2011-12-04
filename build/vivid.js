@@ -18,22 +18,22 @@ var Vivid = $.Vivid = {
 Vivid.Console = (function() {
     if(console) {
 	    return {
-		    log: $.proxy(console.log, console),
-		    assert: $.proxy(console.assert, console),
-		    clear: $.proxy(console.clear, console),
-		    count: $.proxy(console.count, console),
-		    dir: $.proxy(console.dir, console),
-		    dirxml: $.proxy(console.dirxml, console),
-		    exception: $.proxy(console.exception, console),
-		    group: $.proxy(console.group, console),
-		    groupCollapsed: $.proxy(console.groupCollapsed, console),
-		    groupEnd: $.proxy(console.groupEnd, console),
-		    profile: $.proxy(console.profile, console),
-		    profileEnd: $.proxy(console.profileEnd, console),
-		    table: $.proxy(console.table, console),
-		    time: $.proxy(console.time, console),
-		    timeEnd: $.proxy(console.timeEnd, console),
-		    trace: $.proxy(console.trace, console)
+		    log: console.log ? $.proxy(console.log, console) : $.noop,
+		    assert: console.assert ? $.proxy(console.assert, console) : $.noop,
+		    clear: console.clear ? $.proxy(console.clear, console) : $.noop,
+		    count: console.count ? $.proxy(console.count, console) : $.noop,
+		    dir: console.dir ? $.proxy(console.dir, console) : $.noop,
+		    dirxml: console.dirxml ? $.proxy(console.dirxml, console) : $.noop,
+		    exception: console.exception ? $.proxy(console.exception, console) : $.noop,
+		    group: console.group ? $.proxy(console.group, console) : $.noop,
+		    groupCollapsed: console.groupCollapsed ? $.proxy(console.groupCollapsed, console) : $.noop,
+		    groupEnd: console.groupEnd ? $.proxy(console.groupEnd, console) : $.noop,
+		    profile: console.profile ? $.proxy(console.profile, console) : $.noop,
+		    profileEnd: console.profileEnd ? $.proxy(console.profileEnd, console) : $.noop,
+		    table: console.table ? $.proxy(console.table, console) : $.noop,
+		    time: console.time ? $.proxy(console.time, console) : $.noop,
+		    timeEnd: console.timeEnd ? $.proxy(console.timeEnd, console) : $.noop,
+		    trace: console.trace ? $.proxy(console.trace, console) : $.noop
 	    }
     }
     return {
