@@ -1,10 +1,19 @@
-Vivid.Collection = (function(exports) {
+/**
+ * Simple collection class
+ * 
+ * @name $.Vivid.Collection
+ */
+Vivid.Collection = (function() {
+    
+    /**
+     * Variables hash-container
+     * @private
+     * @property
+     */
     var vars = new Object();
     
     /**
-     * Simple collection class
-     * 
-     * @name $.Vivid.Collection
+     * @constructor
      */
     var Collection = function() {
 	    if(this instanceof Collection) {
