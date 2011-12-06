@@ -14,7 +14,21 @@ Vivid.Control = (function() {
     };
 
     Control.prototype = {
-
+		
+		/**
+		 * Defers the initialization of control before the moment when specified event will fired
+		 * 
+		 * @param {string} on initialization event
+		 * @param {jQuery} $context event context
+		 */
+		deferInit: function(on, $context) {
+			if($context instanceof $) {
+				$context.on(on, $.proxy(this.init, this));
+			}
+			
+			return this;
+		},
+		
 	    /**
 	     * Generates jQuery objects cache from Control.config.selectors
 	     * 
