@@ -38,7 +38,7 @@ Vivid.Template = (function() {
 	     */
 	    var parse = function(match) {
 		if(match == '::') {
-		    return match;
+		    return ':';
 		}
 		
 		var
