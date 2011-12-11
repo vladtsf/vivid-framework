@@ -119,52 +119,100 @@ Vivid.Control = (function() {
 
 		    return this;
 	    },
+	    
+	    /**
+	     * Takes element from with following priority
+	     * * this.elements[element]
+	     * * element
+	     * * $(element, this.$context)
+	     *
+	     * @param {string|jQuery|selector} [element=this.$context] element name/selector
+	     * @param {boolean} [live=false] return selector or queried element
+	     */
+	    getElement: function(element, live) {
+		if(element) {
+		    if(typeof element == 'string' & !!this.elements[element]) {
+			return this.elements[element];
+		    } else if (element instanceof NodeList | element instanceof Node) {
+			return $(element);
+		    } else if(element instanceof $ | live) {
+			return element;
+		    } else {
+			return $(element, this.$context);
+		    }
+		}
+		
+		return this.$context;
+	    },
 
 	    /**
 	     * Main events binding helper
 	     * 
 	     * @param {string} type event type
-	     * @param {string|jQuery} element element's name (as in Control.config.selectors) or jQuery object/selector
+	     * @param {string|jQuery} [element=this.$context] element's name (as in Control.config.selectors) or jQuery object/selector
 	     * @param {function} handler event handler (will be proxied to control's context)
-	     * @param {object} lockable turns on/off event locking
+	     * @param {object} [lockable=true] turns on/off event locking
 	     * @return Control
 	     */
 	    on: function(type, element, handler, lockable) {
 		    var $e;
 
-		    if(element && type && handler) {
-			    if(element instanceof $) {
-				    $e = element;
-			    } else if(this.elements[element]) {
-				    $e = this.elements[element];
-			    } else {
-				    $e = element;
-			    }
+		    if(type) {
+			
+			if(typeof element == 'function') {
+			    $e = this.$context;
+			    handler = element;
+			    lockable = handler;
+			} else {
+			    $e = this.getElement(element, true);
+			}
+			
+			if(typeof handler != 'function') {
+			    return this;
+			}
 
-			    if(lockable === false) {
-				    if(typeof($e) == 'string') {
-					    this.$context.on(type, $e, $.proxy(handler, this));
-				    } else {
-					    $e.on(type, $.proxy(handler, this));
-				    }
-			    } else {
-				    var wrap = $.proxy(function() {
-					    if(!this.locked) {
-						    return handler.apply(this, arguments);
-					    }
+			if(lockable === false) {
+				if(typeof($e) == 'string') {
+					this.$context.on(type, $e, $.proxy(handler, this));
+				} else {
+					$e.on(type, $.proxy(handler, this));
+				}
+			} else {
+				var wrap = $.proxy(function() {
+					if(!this.locked) {
+						return handler.apply(this, arguments);
+					}
 
-					    return false;
-				    }, this);
-
-				    if(typeof($e) == 'string') {
-					    this.$context.on(type, $e, wrap);
-				    } else {
-					    $e.on(type, wrap);
-				    }
-			    }
+					return false;
+				}, this);
+				
+				if(typeof($e) == 'string') {
+					this.$context.on(type, $e, wrap);
+				} else {
+					$e.on(type, wrap);
+				}
+			}
 		    }
 
 		    return this;
+	    },
+	    
+	    /**
+	     * Adds drag functionality to the element
+	     * 
+	     * @param {string|jQuery|selector} [holder=this.$context] drag holder
+	     * @param {string|jQuery|selector} [target=this.$context] element wich will be dragged
+	     */
+	    makeDraggable: function(holder, target) {
+		var 
+		    $target = this.getElement(target);
+		
+		var draggable = new Helper.Draggable($target);
+		
+		this
+		    .on('mousedown', holder, draggable.mouseDownHandler)
+		    .on('mouseup', d, draggable.mouseUpHandler)
+		    .on('mousemove', d, draggable.mouseMoveHandler);
 	    }
     };
     

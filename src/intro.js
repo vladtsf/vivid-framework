@@ -4,3 +4,5 @@ var Vivid = $.Vivid = {
     version: '0.0.1'
     
 };
+
+var Helper = Vivid.Helper = new Object();
