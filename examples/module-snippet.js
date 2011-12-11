@@ -6,7 +6,7 @@
 	Cookie = Vivid.Cookie,
 	Template = Vivid.Template;
 	
-    var Test = function($context, id, config) {
+    var Test = function($context, config) {
 	this.init($context, config, Test.defaults);
     };
 	
