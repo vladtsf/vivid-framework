@@ -631,6 +631,8 @@ Vivid.Control = (function() {
 		    .on('mousedown', holder, draggable.mouseDownHandler)
 		    .on('mouseup', d, draggable.mouseUpHandler)
 		    .on('mousemove', d, draggable.mouseMoveHandler);
+		    
+		return this;
 	    }
     };
     
