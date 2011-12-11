@@ -494,7 +494,7 @@ Vivid.Control = (function() {
 		    this
 			.parseConfig(defaults, config);
 			    
-		    if(this.config.selectors) {
+		    if(this.config && this.config.selectors) {
 			this.genCache();
 		    }
 			
