@@ -90,7 +90,7 @@
 	equal((new Template('test :a:')).compile().eval(obj), 'test foo', 'One variable');
 	equal((new Template('test :a: :b::c:')).compile().eval(obj), 'test foo barbaz', 'Many variables');
 	equal((new Template('test :a: :b::c:')).compile().eval(obj), 'test foo barbaz', 'Many variables');
-	equal((new Template('test ::b:')).compile().eval(obj), 'test ::b:', 'Screening');
+	equal((new Template('test ::b:')).compile().eval(obj), 'test :b:', 'Screening');
 	equal((new Template('test :e:')).compile().eval(obj), 'test ', 'Undefined variable');
 	
     });
