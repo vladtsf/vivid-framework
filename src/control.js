@@ -136,7 +136,7 @@ Vivid.Control = (function() {
 	     */
 	    getElement: function(element, live) {
 		if(element) {
-		    if(typeof element == 'string' & !!this.elements[element]) {
+		    if(typeof element == 'string' && this.elements[element]) {
 			return this.elements[element];
 		    } else if (element instanceof NodeList | element instanceof Node) {
 			return $(element);
