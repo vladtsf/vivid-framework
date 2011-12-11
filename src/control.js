@@ -15,19 +15,19 @@ Vivid.Control = (function() {
 
     Control.prototype = {
 		
-		/**
-		 * Defers the initialization of control before the moment when specified event will fired
-		 * 
-		 * @param {string} on initialization event
-		 * @param {jQuery} $context event context
-		 */
-		deferInit: function(on, $context) {
-			if($context instanceof $) {
-				$context.on(on, $.proxy(this.init, this));
-			}
-			
-			return this;
-		},
+	    /**
+	     * Defers the initialization of control before the moment when specified event will fired
+	     * 
+	     * @param {string} on initialization event
+	     * @param {jQuery} $context event context
+	     */
+	    deferInit: function(on, $context) {
+		    if($context instanceof $) {
+			    $context.on(on, $.proxy(this.init, this));
+		    }
+
+		    return this;
+	    },
 		
 	    /**
 	     * Generates jQuery objects cache from Control.config.selectors
@@ -79,9 +79,14 @@ Vivid.Control = (function() {
 		    }
 
 		    this
-			    .parseConfig(defaults, config)
-			    .genCache()
-			    .listen();
+			.parseConfig(defaults, config);
+			    
+		    if(this.config.selectors) {
+			this.genCache();
+		    }
+			
+		    this
+			.listen();
 
 		    this.locked = false;
 
