@@ -1,3 +1,6 @@
+[submodule "build/builder"]
+	path = build/builder
+	url = git@github.com:vtsvang/vivid-builder.git
 [submodule "test/qunit"]
 	path = test/qunit
 	url = git://github.com/jquery/qunit.git
