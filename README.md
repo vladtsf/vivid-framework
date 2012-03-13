@@ -50,7 +50,6 @@ You can use it for simple templating.
 Control is a helper for plugins. It's contains methods for working with events, locking and other.
 
 # Building
-Development and minified versions located in the `bin` folder. If you want to rebuild that from sources, use `build.sh` (`build.bat` for Windows) script.
-Building config located at `build/overall.tpl.js`.
+Development and minified versions located in the `bin` folder. If you want to rebuild that from sources, use make.
 
-Builder written on node.js dependends from some packages. To fetch it run the following code: `cd build/builder; npm install .`
+To install scripts bundler type `make bundler`.
