@@ -56,7 +56,7 @@ Vivid.Control = (function() {
 	     */
 	    parseConfig: function(defaults, config) {
 		    if(config) {
-			    this.config = $.extend(true, defaults, config);
+			    this.config = $.extend(true, {}, defaults, config);
 		    } else {
 			    this.config = defaults;
 		    }
